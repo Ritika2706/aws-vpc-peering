@@ -1,0 +1,5 @@
+.env
+*.pem
+*.ppk
+.aws/
+.DS_Store
