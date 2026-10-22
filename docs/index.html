@@ -1,1 +1,24 @@
-
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS VPC Peering Project</title>
+<style>
+:root{--ink:#172033;--blue:#2458a6;--pale:#eef4ff;--line:#d9e2f0}*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;line-height:1.65;color:var(--ink);background:#f8fafc}
+header{background:#102a43;color:white;padding:56px 20px;text-align:center}header h1{margin:0 0 12px;font-size:clamp(2rem,5vw,3.2rem)}header p{max-width:760px;margin:auto;color:#dce8f5}
+main{max-width:1000px;margin:28px auto;padding:0 18px}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin:18px 0;box-shadow:0 5px 18px #102a430a}
+h2{color:var(--blue);margin-top:0}.pill{display:inline-block;background:var(--pale);color:var(--blue);padding:4px 10px;border-radius:30px;margin:3px;font-size:.9rem}
+img{width:100%;height:auto}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.tile{background:#f5f8fc;padding:16px;border-radius:10px}
+a{color:#174ea6}code{background:#eef2f7;padding:2px 5px;border-radius:4px}footer{text-align:center;padding:24px;color:#526174}
+</style></head><body>
+<header><h1>AWS VPC Peering</h1><p>A hands-on cloud networking project to connect two private Amazon VPCs using peering, route tables, security groups, and a bastion host.</p></header>
+<main>
+<section class="panel"><h2>Project overview</h2><p>This project plan demonstrates private IPv4 communication between workloads in two non-overlapping VPCs. A bastion host provides administrative SSH access while the application instances remain private.</p><span class="pill">Amazon VPC</span><span class="pill">VPC Peering</span><span class="pill">EC2</span><span class="pill">Routing</span><span class="pill">Security Groups</span></section>
+<section class="panel"><h2>Architecture</h2><img src="architecture.svg" alt="Architecture diagram of two VPCs connected by VPC peering"></section>
+<section class="panel"><h2>Network design</h2><div class="grid">
+<div class="tile"><strong>VPC A</strong><br>10.10.0.0/16<br>Public bastion: 10.10.1.10<br>Private App-A: 10.10.2.10</div>
+<div class="tile"><strong>VPC B</strong><br>10.20.0.0/16<br>Private App-B: 10.20.1.10<br>No Internet Gateway</div>
+<div class="tile"><strong>Peering</strong><br>Bidirectional routes are required. Peering does not automatically create routes or provide internet access to VPC B.</div></div></section>
+<section class="panel"><h2>Validation checklist</h2><ul><li>Baseline ping fails before peering routes.</li><li>Forward and reverse private-IP ping tests succeed after configuration.</li><li>SSH to App-B works through the bastion.</li><li>App-A and App-B have no public IPv4 addresses.</li><li>A controlled ICMP rule removal causes failure; restoring it recovers connectivity.</li></ul><p><strong>Evidence status:</strong> This is a project documentation site. Replace this note with your verified test summary after deploying the resources in your AWS account.</p></section>
+<section class="panel"><h2>Repository and report</h2><p>Upload this project folder to your GitHub repository. Include your final PDF report and screenshots of your own AWS console and terminal tests.</p><p><strong>Report:</strong> <code>AWS_VPC_Peering_Project_Report.pdf</code> (included in the repository package).</p></section>
+<section class="panel"><h2>Security and cost</h2><p>Restrict SSH to your own public IPv4 /32 and private-host SSH to the bastion. Never publish private keys. AWS EC2, EBS, and public IPv4 usage may incur charges. Check current pricing and delete lab resources after collecting evidence.</p></section>
+</main><footer>Learning project · AWS VPC Peering · Update with your own implementation evidence</footer></body></html>
